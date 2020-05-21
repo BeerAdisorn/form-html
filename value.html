@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col">Problem type</th>
+                <th scope="col">Course</th>
+                <th scope="col">The Message</th>
+            </tr>
+        </thead>
+        <tbody id="ex-table-body">
+        </tbody>
+    </table>
+
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase.js"></script>
+    <script src="configfirebase.js"></script>
+
+    <script>
+        var database = firebase.database();
+        database.ref("Detail/").once('value', function (snapshot) {
+
+            const table = document.getElementById("ex-table-body");
+            let content = '';
+
+            snapshot.forEach(function (data) {
+                const value = data.val()
+
+                const row = table.insertRow()
+
+                const nameCol = row.insertCell(0)
+                nameCol.innerHTML = value.name
+
+                const lastnameCol = row.insertCell(1)
+                lastnameCol.innerHTML = value.lastname
+
+                const phonenumberCol = row.insertCell(2)
+                phonenumberCol.innerHTML = value.phonenumber
+
+                const emailCol = row.insertCell(3)
+                emailCol.innerHTML = value.email
+
+                const problemtypeCol = row.insertCell(4)
+                problemtypeCol.innerHTML = value.problemtype
+
+                const nocourse_specifiedCol = row.insertCell(5)
+                nocourse_specifiedCol.innerHTML = value.nocourse_specified
+
+                const messageCol = row.insertCell(6)
+                messageCol.innerHTML = value.message
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

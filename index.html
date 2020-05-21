@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="model-body">
+                <div class="row report-row">
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" id="name">
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>Last name</label>
+                        <input type="text" class="form-control" placeholder="Last name" id="lastname">
+                    </div>
+                </div>
+                <div class="row report-row">
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" placeholder="Phone number" id="phonenumber">
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>email</label>
+                        <input type="email" class="form-control" id="email" placeholder="email">
+                    </div>
+                </div>
+                <div class="row report-row">
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>Problem type</label>
+                        <select id="problemtype" class="form-control d-inlineblock ">
+                            <option value="Problem type">Problem type</option>
+                            <option value="login">login</option>
+                            <option value="Register">Register</option>
+                            <option value="Tester">Tester</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+                        <label>Course</label>
+                        <select id="nocourse_specified" class="form-control d-inlineblock ">
+                            <option value="No course specified">No course specified</option>
+                            <option value="course nooknik">course nooknik</option>
+                            <option value="test system 1">test system 1</option>
+                            <option value="dfgdfg">dfgdfg</option>
+                            <option value="Grow vegetables">Grow vegetables</option>
+                            <option value="test 2">test 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row report-row">
+                    <div class="col-md-12 col-xs-12">
+                        <label>The message</label>
+                        <textarea name="" class="form-control" placeholder="Type your message in this box."
+                            id="message"></textarea>
+                    </div>
+                </div>
+                <div class="row report-row">
+                    <div class="col-md-12 col-xs-12">
+                        <label>Upload photo</label>
+                        <input type="file" class="form-control">
+                    </div>
+                </div>
+                <hr />
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-report" onclick="save_user();">Confirm</button>
+                </div>
+                <hr />
+                <div class="text-center">
+                    <a href="value.html">value</a>
+                </div>
+            </div>
+        </div>
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase.js"></script>
+        <script src="configfirebase.js"></script>
+
+        <script>
+            const databaseRef = firebase.database().ref("/")
+            const detailRef = databaseRef.child("/Detail")
+
+            function save_user() {
+                var nameP = document.getElementById('name').value;
+                var lastnameP = document.getElementById('lastname').value;
+                var phonenumberP = document.getElementById('phonenumber').value;
+                var emailP = document.getElementById('email').value;
+                var problemtypeP = document.getElementById('problemtype').value;
+                var nocourse_specifiedP = document.getElementById('nocourse_specified').value;
+                var messageP = document.getElementById('message').value;
+
+                const newDetailKey = detailRef.push().key
+
+                detailRef.child(newDetailKey).set({
+                    name: nameP,
+                    lastname: lastnameP,
+                    phonenumber: phonenumberP,
+                    email: emailP,
+                    problemtype: problemtypeP,
+                    nocourse_specified: nocourse_specifiedP,
+                    message: messageP
+                }, function (error) {
+                    if (error) {
+                        alert("Error")
+                    } else {
+                        alert("Success")
+                        location.reload();
+                    }
+                });
+
+            }
+        </script>
+</body>
+
+</html>
